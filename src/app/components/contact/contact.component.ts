@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ContactService } from '../../services/contact.service';
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit(): void {
   }
