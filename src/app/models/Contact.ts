@@ -1,9 +1,11 @@
 export interface Contact {
-  id?: number,
-  firstName: string,
-  lastName: string,
+  id?: any,
+  name: string,
+  nameInitials?: string,
+  username?: string,
   email: string,
   phone: string,
+  defaultAvatar?: string,
   isNew?: boolean,
   onDelete?: boolean
 }

@@ -1,0 +1,55 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 8rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+.separator {
+  margin: 0;
+  margin-bottom: 1rem;
+  border-color: rgba(126, 143, 151, 0.2);
+}
+
+.owner-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title, .desc {
+  color: #7e8f97;
+  font-size: 0.80rem;
+  text-align: center;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  user-select: none;
+}
+
+.links li:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.links li a {
+  display: block;
+  color: #7e8f97;
+  transition: color 0.2s ease;
+}
+
+.links li a .fab {
+  font-size: 1.1rem;
+}
+
+.links li a:hover {
+  color: #1e87f0;
+}

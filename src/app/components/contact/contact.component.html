@@ -1,1 +1,63 @@
-<button mat-raised-button>Get Contacts</button>
+<div class="container">
+  <app-contactform></app-contactform>
+
+  <div *ngIf="!loaded" id="load-icon">
+    <mat-spinner diameter="60"></mat-spinner>
+  </div>
+
+  <div 
+  *ngIf="loaded && contacts.length == 0" 
+  id="no-contacts-mgs">
+    <h2>No Contacts Found</h2>
+    <button mat-raised-button color="primary">Retry</button>
+  </div>
+
+  <section 
+  *ngIf="loaded && contacts.length > 0" 
+  id="contacts-container">
+    <h1 id="title">Contacts</h1>
+
+    <mat-card 
+    *ngFor="let contact of contacts"
+    [ngClass]="contactState(contact)">
+      <mat-card-header>
+        <div 
+        mat-card-avatar class="contact-avatar"
+        [style.backgroundColor]="contact.defaultAvatar">
+          {{contact.nameInitials}}
+        </div>
+        <mat-card-title>{{contact.name}}</mat-card-title>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <div id="contact-email">
+          <mat-icon>email</mat-icon> 
+          <span>{{contact.email}}</span>
+        </div>
+        <div id="contact-phone">
+          <mat-icon>phone</mat-icon> 
+          <span>{{contact.phone}}</span>
+        </div>
+      </mat-card-content>
+  
+      <button 
+      class="contact-options" 
+      mat-icon-button 
+      matTooltip="Contact Options"
+      matTooltipPosition="after"
+      [matMenuTriggerFor]="options">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #options="matMenu" xPosition="before">
+        <button (click)="onEdit(contact)" mat-menu-item>
+          <mat-icon>edit</mat-icon>
+          <span>Edit Contact</span>
+        </button>
+        <button (click)="onRemove(contact)" mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          <span>Remove</span>
+        </button>
+      </mat-menu>
+    </mat-card>
+  </section>
+</div>

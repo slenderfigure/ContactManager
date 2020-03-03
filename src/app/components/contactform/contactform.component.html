@@ -1,0 +1,93 @@
+<button 
+[disabled]="updateState"
+class="add-new-contact"
+(click)="displayForm = !displayForm" 
+mat-raised-button>
+  <mat-icon 
+  [textContent]="!displayForm ? 'person' : 'not_interested'"></mat-icon>
+  <span
+  [textContent]="!displayForm ? 'Add Contact' : 'Close Form'"></span>
+</button>
+
+<div 
+*ngIf="displayForm" 
+class="form-backdrop">
+  <form 
+  #contactForm="ngForm" 
+  (ngSubmit)="onSubmit(contactForm)" 
+  id="contactForm">
+
+    <mat-form-field appearance="outline" hideRequiredMarker>
+      <mat-label>Contact name</mat-label>
+      <input
+      type="text"
+      name="name"
+      [(ngModel)]="contact.name" 
+      #name="ngModel"
+      matInput
+      required
+      pattern="[A-zÀ-ú\s]{2,}"
+      placeholder="First and last name">
+      <mat-error *ngIf="name.errors?.required">
+        Contact name is <strong>required</strong> 
+      </mat-error>
+      <mat-error *ngIf="name.errors?.pattern">
+        Please enter a valid name
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" hideRequiredMarker>
+      <mat-label>Email</mat-label>
+      <input
+      type="email"
+      name="email"
+      [(ngModel)]="contact.email" 
+      #email="ngModel"
+      matInput       
+      required
+      pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+      placeholder="Eg: email@domain.com">
+      <mat-error *ngIf="email.errors?.required">
+        The email is <strong>required</strong> 
+      </mat-error>
+      <mat-error *ngIf="email.errors?.pattern">
+        Please enter a valid email <address></address>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" hideRequiredMarker>
+      <mat-label>Phone</mat-label>
+      <input
+      type="text"
+      name="phone"
+      [(ngModel)]="contact.phone" 
+      #phone="ngModel"
+      matInput
+      required
+      pattern="^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"       
+      placeholder="Eg: 555-555-5555">
+      <mat-error *ngIf="phone.errors?.required">
+        The phone is <strong>required</strong> 
+      </mat-error>
+      <mat-error *ngIf="phone.errors?.pattern">
+        Please enter a valid phone phone number
+      </mat-error>
+    </mat-form-field>  
+
+    <button 
+    *ngIf="!updateState" 
+    type="submit"
+    mat-raised-button
+    [disabled]="!contactForm.form.valid">Add Contact</button>
+
+    <button 
+    *ngIf="updateState" 
+    type="submit" 
+    mat-raised-button
+    [disabled]="!contactForm.form.valid">Update Contact</button>
+
+    <div *ngIf="!loaded" class="form-overlay">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  </form>
+</div>
