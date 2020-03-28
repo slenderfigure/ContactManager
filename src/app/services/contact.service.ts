@@ -32,8 +32,11 @@ export class ContactService {
      * Otherwise, the data will be load from the 
      * localStorage
      */
-    if (localStorage.getItem('ContactManager') == null) {
-      
+    this.loadContacts();
+  }
+
+  loadContacts() {
+    if (!localStorage.getItem('ContactManager')) {
       this.http.get<Contact[]>(this.url, {headers: headerOptions})
         .subscribe(data => {
           this.retrievedContacts.next(data);
